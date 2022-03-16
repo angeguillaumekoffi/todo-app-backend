@@ -16,7 +16,7 @@ export const resolvers = {
       });
     },
     
-    findAtodo: (root: any, todo: any) => {
+    findATodo: (root: any, todo: any) => {
       return new Promise((resolve, reject) => {
         todoList.findOne({ _id: todo.id }, (err: any, todo: TodoListModel) => {
           if (err) reject(err);
@@ -25,15 +25,16 @@ export const resolvers = {
       });
     }
   },
+  
   Mutation: {
-    addTodo: (root: any, { friend }) => {
-      const { ...rest } = friend;
+    addTodo: (root: any, { todolist }) => {
+      const { ...rest } = todolist;
       const newTodo = new todoList({ ...rest });
 
       return new Promise((resolve, reject) => {
-        newTodo.save((err: any, friend: TodoListModel) => {
+        newTodo.save((err: any, todolist: TodoListModel) => {
           if (err) reject(err);
-          else resolve(friend);
+          else resolve(todolist);
         });
       });
     },
