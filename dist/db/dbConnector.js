@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.todoList = void 0;
+exports.TodoListModel = void 0;
 const mongoose = require("mongoose");
 const { environment } = require("../config/config");
 const { todoListSchema } = require("./schema");
@@ -16,6 +16,6 @@ let db = mongoose.connection;
 db.on("error", () => {
     console.error("Error while connecting to DB");
 });
-const todoList = mongoose.model("TodoList", todoListSchema);
-exports.todoList = todoList;
+const TodoListModel = mongoose.model("TodoList", todoListSchema);
+exports.TodoListModel = TodoListModel;
 //# sourceMappingURL=dbConnector.js.map

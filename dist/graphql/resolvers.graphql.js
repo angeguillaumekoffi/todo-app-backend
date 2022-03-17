@@ -20,7 +20,7 @@ exports.resolvers = {
     Query: {
         getTodoList: (root) => {
             return new Promise((resolve, reject) => {
-                db_1.todoList.find((err, todolist) => {
+                db_1.TodoListModel.find((err, todolist) => {
                     if (err)
                         reject(err);
                     else
@@ -28,43 +28,47 @@ exports.resolvers = {
                 });
             });
         },
-        findATodo: (root, todo) => {
+        findTodoItem: (root, todoItem) => {
             return new Promise((resolve, reject) => {
-                db_1.todoList.findOne({ $or: [{ _id: todo.id }, { title: todo.title }] }, (err, todo) => {
+                db_1.TodoListModel.findOne({ $or: [{ _id: todoItem.id }, { title: todoItem.title }] }, (err, todoItem) => {
                     if (err)
                         reject(err);
                     else
-                        resolve(todo);
+                        resolve(todoItem);
                 });
             });
         }
     },
     Mutation: {
-        addTodo: (root, { todolist }) => {
-            const rest = __rest(todolist, []);
-            const newTodo = new db_1.todoList(Object.assign({}, rest));
+        addTodoItem: (root, { todoItemInput }) => {
+            const rest = __rest(todoItemInput, []);
+            const newTodo = new db_1.TodoListModel(Object.assign({}, rest));
             return new Promise((resolve, reject) => {
-                newTodo.save((err, todolist) => {
+                newTodo.save((err, todoItem) => {
                     if (err)
                         reject(err);
                     else
-                        resolve(todolist);
+                        resolve(todoItem);
                 });
             });
         },
-        updateTodo: (root, { todolist }) => {
-            const rest = __rest(todolist, []);
-            const newTodo = new todolist(Object.assign({}, rest));
+        updateTodoItem: (root, { todoItemInput }) => {
             return new Promise((resolve, reject) => {
-                newTodo.save((err, todo) => {
+                db_1.TodoListModel.updateOne({ _id: todoItemInput.id }, { $set: todoItemInput }, (err, res) => {
                     if (err)
                         reject(err);
-                    resolve(todo);
+                    resolve(res);
                 });
             });
         },
-        deleteTodo: (root, todo) => {
-            console.log(todo);
+        deleteTodoItem: (root, id) => {
+            return new Promise((resolve, reject) => {
+                db_1.TodoListModel.deleteOne({ _id: id }, (err, res) => {
+                    if (err)
+                        reject(err);
+                    resolve(res);
+                });
+            });
         }
     },
 };

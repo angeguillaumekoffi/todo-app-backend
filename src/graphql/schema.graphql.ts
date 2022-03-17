@@ -1,7 +1,7 @@
 import { gql } from "apollo-server-express";
 
 export const typeDefs = gql`
-  type TodoList {
+  type TodoItem {
     id: ID
     title: String
     description: String
@@ -9,21 +9,28 @@ export const typeDefs = gql`
     updatedAt: Float
   }
   
-  input TodoListInput {
+  input addTodoItemInput {
     title: String
     description: String
     createdAt: Float
     updatedAt: Float
   }
+
+  input updateTodoItemInput {
+    id: ID!
+    title: String
+    description: String
+    updatedAt: Float
+  }
   
   type Query {
-    getTodoList: [TodoList]
-    findATodo(id: String, title: String): TodoList
+    getTodoList: [TodoItem]
+    findTodoItem(id: String, title: String): TodoItem
   }
   
   type Mutation {
-    addTodo(todolist: TodoListInput): TodoList
-    updateTodo(todolist: TodoListInput): TodoList
-    deleteTodo(id: String): TodoList
+    addTodoItem(todoItemInput: addTodoItemInput): TodoItem
+    updateTodoItem(todoItemInput: updateTodoItemInput): TodoItem
+    deleteTodoItem(id: String): String
   }
 `;

@@ -3,7 +3,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.typeDefs = void 0;
 const apollo_server_express_1 = require("apollo-server-express");
 exports.typeDefs = (0, apollo_server_express_1.gql) `
-  type TodoList {
+  type TodoItem {
     id: ID
     title: String
     description: String
@@ -11,22 +11,29 @@ exports.typeDefs = (0, apollo_server_express_1.gql) `
     updatedAt: Float
   }
   
-  input TodoListInput {
+  input addTodoItemInput {
     title: String
     description: String
     createdAt: Float
     updatedAt: Float
   }
+
+  input updateTodoItemInput {
+    id: ID!
+    title: String
+    description: String
+    updatedAt: Float
+  }
   
   type Query {
-    getTodoList: [TodoList]
-    findATodo(id: String, title: String): TodoList
+    getTodoList: [TodoItem]
+    findTodoItem(id: String, title: String): TodoItem
   }
   
   type Mutation {
-    addTodo(todolist: TodoListInput): TodoList
-    updateTodo(todolist: TodoListInput): TodoList
-    deleteTodo(id: String): TodoList
+    addTodoItem(todoItemInput: addTodoItemInput): TodoItem
+    updateTodoItem(todoItemInput: updateTodoItemInput): TodoItem
+    deleteTodoItem(id: String): String
   }
 `;
 //# sourceMappingURL=schema.graphql.js.map

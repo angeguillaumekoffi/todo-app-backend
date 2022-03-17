@@ -1,5 +1,4 @@
-import { TodoListModel } from "../model";
-import { todoList } from "../db";
+import { TodoListModel } from "../db";
 
 /**
  * GraphQL Resolvers
@@ -9,52 +8,52 @@ export const resolvers = {
   Query: {
     getTodoList: (root: any) => {
       return new Promise((resolve, reject) => {
-        todoList.find((err: any, todolist: TodoListModel[]) => {
+        TodoListModel.find((err: any, todolist: any[]) => {
           if (err) reject(err);
           else resolve(todolist);
         });
       });
     },
     
-    findATodo: (root: any, todo: any) => {
+    findTodoItem: (root: any, todoItem: any) => {
       return new Promise((resolve, reject) => {
-        todoList.findOne({$or: [{ _id: todo.id}, {title: todo.title }]}, (err: any, todo: TodoListModel) => {
+        TodoListModel.findOne({$or: [{ _id: todoItem.id}, {title: todoItem.title }]}, (err: any, todoItem: any) => {
           if (err) reject(err);
-          else resolve(todo);
+          else resolve(todoItem);
         });
       });
     }
   },
   
   Mutation: {
-    addTodo: (root: any, { todolist }) => {
-      const { ...rest } = todolist;
-      const newTodo = new todoList({ ...rest });
+    addTodoItem: (root: any, { todoItemInput }) => {
+      const { ...rest } = todoItemInput;
+      const newTodo = new TodoListModel({ ...rest });
 
       return new Promise((resolve, reject) => {
-        newTodo.save((err: any, todolist: TodoListModel) => {
+        newTodo.save((err: any, todoItem: any) => {
           if (err) reject(err);
-          else resolve(todolist);
+          else resolve(todoItem);
         });
       });
     },
 
-    updateTodo: (root: any, { todolist }) => {
-      const { ...rest } = todolist;
-      const newTodo = new todolist({
-        ...rest,
-      });
-
+    updateTodoItem: (root: any, { todoItemInput }) => {
       return new Promise((resolve, reject) => {
-        newTodo.save((err: any, todo: TodoListModel) => {
+        TodoListModel.updateOne({_id: todoItemInput.id}, {$set: todoItemInput}, (err: any, res: any) => {
           if (err) reject(err);
-          resolve(todo);
+          resolve(res);
         });
       });
     },
 
-    deleteTodo: (root: any, todo: any) => {
-        console.log(todo);
+    deleteTodoItem: (root: any, id: any) => {
+      return new Promise((resolve, reject) => {
+        TodoListModel.deleteOne({_id: id}, (err: any, res: any) => {
+          if (err) reject(err);
+          resolve(res);
+        });
+      });
     }
   },
 };

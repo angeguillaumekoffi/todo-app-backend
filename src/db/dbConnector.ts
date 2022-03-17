@@ -17,6 +17,6 @@ db.on("error", () => {
   console.error("Error while connecting to DB");
 });
 
-const todoList = mongoose.model("TodoList", todoListSchema);
+const TodoListModel = mongoose.model("TodoList", todoListSchema);
 
-export { todoList };
+export { TodoListModel };
