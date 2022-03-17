@@ -1,5 +1,5 @@
-import { todoList } from "../db";
 import { TodoListModel } from "../model";
+import { todoList } from "../db";
 
 /**
  * GraphQL Resolvers
@@ -18,7 +18,7 @@ export const resolvers = {
     
     findATodo: (root: any, todo: any) => {
       return new Promise((resolve, reject) => {
-        todoList.findOne({ _id: todo.id }, (err: any, todo: TodoListModel) => {
+        todoList.findOne({$or: [{ _id: todo.id}, {title: todo.title }]}, (err: any, todo: TodoListModel) => {
           if (err) reject(err);
           else resolve(todo);
         });

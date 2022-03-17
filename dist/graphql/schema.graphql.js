@@ -7,20 +7,20 @@ exports.typeDefs = (0, apollo_server_express_1.gql) `
     id: ID
     title: String
     description: String
-    createdAt: Int
-    updatedAt: Int
+    createdAt: Float
+    updatedAt: Float
   }
   
   input TodoListInput {
     title: String
     description: String
-    createdAt: Int
-    updatedAt: Int
+    createdAt: Float
+    updatedAt: Float
   }
   
   type Query {
     getTodoList: [TodoList]
-    findATodo(id: String): TodoList
+    findATodo(id: String, title: String): TodoList
   }
   
   type Mutation {

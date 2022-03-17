@@ -30,7 +30,7 @@ exports.resolvers = {
         },
         findATodo: (root, todo) => {
             return new Promise((resolve, reject) => {
-                db_1.todoList.findOne({ _id: todo.id }, (err, todo) => {
+                db_1.todoList.findOne({ $or: [{ _id: todo.id }, { title: todo.title }] }, (err, todo) => {
                     if (err)
                         reject(err);
                     else
