@@ -34,7 +34,7 @@ startServer();
 app.get("/", (req, res) => {
     console.log("Apollo GraphQL Express server is ready");
 });
-app.listen({ port: config_1.PORT }, () => {
-    console.log(`Server is running at http://localhost:${config_1.PORT}${server.graphqlPath}`);
+app.listen({ port: config_1.NODE_PORT }, () => {
+    console.log(`Server is running at http://localhost:${config_1.NODE_PORT}${server.graphqlPath}`);
 });
 //# sourceMappingURL=index.js.map

@@ -6,6 +6,6 @@ export const environment = {
     },
     production: {
         serverURL: `http://localhost:${PORT}/`,
-        dbString: "mongodb://localhost:27017/todolist_api",
+        dbString: "mongodb://mongo:27017/todolist_api",
     },
 };

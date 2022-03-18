@@ -1,6 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.TodoListModel = void 0;
+require("dotenv").config();
 const mongoose = require("mongoose");
 const { environment } = require("../config/config");
 const { todoListSchema } = require("./schema");

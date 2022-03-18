@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 const { environment } = require("../config/config");
 const { todoListSchema } = require("./schema");
-const env = process.env.NODE_ENV || "development";
+const env = "production";
 
 /**
  * Mongoose Connection
