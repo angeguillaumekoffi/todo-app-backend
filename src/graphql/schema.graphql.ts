@@ -12,14 +12,12 @@ export const typeDefs = gql`
   input addTodoItemInput {
     title: String
     description: String
-    createdAt: Float
-    updatedAt: Float
   }
 
   input updateTodoItemInput {
     id: ID!
-    title: String
-    description: String
+    title: String!
+    description: String!
     updatedAt: Float
   }
   

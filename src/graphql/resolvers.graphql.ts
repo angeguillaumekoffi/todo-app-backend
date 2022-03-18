@@ -39,6 +39,8 @@ export const resolvers = {
     },
 
     updateTodoItem: (root: any, { todoItemInput }) => {
+      todoItemInput.updatedAt = new Date().getTime();
+
       return new Promise((resolve, reject) => {
         TodoListModel.updateOne({_id: todoItemInput.id}, {$set: todoItemInput}, (err: any, res: any) => {
           if (err) reject(err);
